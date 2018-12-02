@@ -1,42 +1,27 @@
-const FlowStatusWebpackPlugin = require('flow-status-webpack-plugin');
+const webpack = require("webpack");
+const htmlWebpackPlugin = require("html-webpack-plugin");
 
 module.exports = {
-  context: __dirname + '/src',
-  entry: {
-    javascript: './index.js',
-    html: '../index.html',
-  },
-
-  devServer: {
-    stats: 'errors-only',
-  },
-
+  mode: "development",
+  entry: "./ts/index.tsx",
   output: {
     filename: 'app.js',
-    path: __dirname + '/dist',
+    path: `${__dirname}/dist`,
   },
-
   resolve: {
-    extensions: ['', '.js', '.jsx', '.json']
+    extensions: ['.ts', '.tsx', '.js']
   },
-
-  plugins: [
-    new FlowStatusWebpackPlugin({
-      failOnError: true
-    })
-  ],
-
   module: {
-    loaders: [
+    rules: [
       {
-        test: /\.jsx?$/,
-        exclude: /node_modules/,
-        loaders: ['babel-loader']
-      },
-      {
-        test: /\.html$/,
-        loader: 'file?name=[name].[ext]'
+        test: /\.tsx?$/,
+        use: 'ts-loader'
       }
-    ]
-  }
+    ],
+  },
+  plugins: [
+    new htmlWebpackPlugin({
+      template: "index.html",
+    })
+  ]
 };
