@@ -4,7 +4,7 @@
   "description": "Mobx example",
   "main": "./src/index.js",
   "scripts": {
-    "dev": "webpack-dev-server",
+    "build": "yarn run ts:clean && webpack && open ./dist/index.html",
     "start": "npm run dev",
     "ts:clean": "rm -rf ./dist",
     "ts:build": "yarn run ts:clean && tsc -p tsconfig.json"
